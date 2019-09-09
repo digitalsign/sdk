@@ -16,6 +16,14 @@
             "DigitalSign\\Sdk\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DigitalSign\\Sdk\\Test\\": "tests/"
+        }
+    },
     "license": "MIT",
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": ">=5.0"
+    }
 }

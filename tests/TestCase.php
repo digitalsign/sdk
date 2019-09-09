@@ -1,22 +1,33 @@
 <?php
 
+namespace DigitalSign\Sdk\Test;
+
 use DigitalSign\Sdk\Client;
-use DigitalSign\Sdk\Requests\CertificateCreateRequest;
-use DigitalSign\Sdk\Requests\CertificateReissueRequest;
-use Illuminate\Support\Str;
+use PHPUnit\Framework\TestCase as AbstractTestCase;
 
-require __DIR__ . '/../../vendor/autoload.php';
+abstract class TestCase extends AbstractTestCase
+{
+    /**
+     * 获取 SDK 实例
+     *
+     * @return \DigitalSign\Sdk\Client
+     */
+    public function sdk()
+    {
+        $access_key_id = $_ENV['DIGITALSIGN_ACCESS_KEY_ID'];
+        $access_key_secret = $_ENV['DIGITALSIGN_ACCESS_KEY_SECRET'];
+        $sdk = new Client($access_key_id, $access_key_secret);
+        return $sdk;
+    }
 
-$sdk = new Client('Trr1955DTkVVOBGE', 'GuL8PncwImH05POunCEzJ9Bv4nY', Client::ORIGIN_API_STAGING);
-
-// 测试产品列表
-// $result = $sdk->product->productList();
-// dd($result->products);
-
-$request = new CertificateCreateRequest();
-$request->product_id = 6;
-$request->period = 'Quarterly';
-$request->csr = '-----BEGIN CERTIFICATE REQUEST-----
+    /**
+     * 获取 CSR
+     *
+     * @return string
+     */
+    public function csr()
+    {
+        return '-----BEGIN CERTIFICATE REQUEST-----
 MIIE2DCCAsACAQAwTzELMAkGA1UEBhMCQ04xFzAVBgNVBAMMDnd3dy5oZXhkYXRh
 LmNuMScwJQYJKoZIhvcNAQkBFhh4aWFvaHVpLmxhbUBlLmhleGRhdGEuY24wggIi
 MA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQC3Di3xa6XVtojvD66o+OCwldYX
@@ -44,23 +55,5 @@ XjfAxlfu67g2ziCic6gtyt+SRYCNLIxBz99lGRj3zXlNLouPxMy99sEoXO3lIgJq
 s4cstKzaK0MA4ghOBKJhyCPNOdxJUcsGuVCWFoXMx7QcXcCzrI0A74FGRMKRa6q/
 zDUNg1i9krVrWMOYyBUQxNHju0eXRsb0vaE0s3c0ayHBjnu8019Ebt6Q9mI=
 -----END CERTIFICATE REQUEST-----';
-$request->unique_id = Str::random();
-$request->product_id = 6;
-$request->period = 'Quarterly';
-$request->contact_email = 'xiaohui.lam@e.hexdata.cn';
-$request->domain_dcv = [
-    'testapi.staging.digital-sign.com.cn' => 'dns',
-];
-$request->notify_url = 'https://webhook.site/a5dbdbe4-e335-4059-87ad-c85d697b2689';
-
-//$result = $sdk->order->certificateCreate($request);
-//dump($result);
-//exit;
-
-//$request = new CertificateReissueRequest();
-//$request->domain_dcv = ['www.baidu.com' => 'dns', 'www2.baidu.com' => 'http',];
-//$request->csr = 'aaa';
-//$request->notify_url = 'https://www.baidu.com/test';
-
-$result = $sdk->order->certificateCreate($request);
-dump($result);
+    }
+}

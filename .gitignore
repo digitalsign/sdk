@@ -1,0 +1,4 @@
+vendor/
+*.cache
+*.bak
+DS_Store
