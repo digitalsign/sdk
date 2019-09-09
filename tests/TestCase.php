@@ -16,8 +16,9 @@ abstract class TestCase extends AbstractTestCase
     {
         $access_key_id = $_SERVER['DIGITALSIGN_ACCESS_KEY_ID'];
         $access_key_secret = $_SERVER['DIGITALSIGN_ACCESS_KEY_SECRET'];
+        $api_origin = $_SERVER['DIGITALSIGN_API_ORIGIN'];
 
-        $sdk = new Client($access_key_id, $access_key_secret);
+        $sdk = new Client($access_key_id, $access_key_secret, $api_origin);
         return $sdk;
     }
 

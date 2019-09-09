@@ -10,7 +10,7 @@ final class ReissueCertificateTest extends TestCase
     {
         $domain = 'testapi.staging.digital-sign.com.cn';
         $request = new CertificateReissueRequest();
-        $request->digitalsign_id = 176133;
+        $request->digitalsign_id = $_SERVER['DIGITALSIGN_ORDER_ID'];
         $request->csr = $this->csr();
         $request->period = 'Quarterly';
         $request->contact_email = 'xiaohui.lam@e.hexdata.cn';
