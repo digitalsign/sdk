@@ -10,7 +10,7 @@ final class UpdateDcvTest extends TestCase
     {
         $domain = 'testapi.staging.digital-sign.com.cn';
         $request = new CertificateUpdateDcvRequest();
-        $request->digitalsign_id = 175277;
+        $request->digitalsign_id = 176133;
         $request->domain = $domain;
         $request->type = 'email';
         $request->value = 'admin@' . $domain;
