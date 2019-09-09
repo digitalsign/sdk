@@ -39,7 +39,7 @@ class Order extends AbstractResource
      * 证书查询接口
      *
      * @param CertificateDetailRequest $certificateDetailRequest
-     * @return \DigitalSign\Sdk\Scheme\Certificate\DnsDCV[]|\DigitalSign\Sdk\Scheme\Certificate\EmailDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpsDCV[]
+     * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
      * @link https://www.digital-sign.com.cn/document/cert-detail
      */
     public function certificateDetail(CertificateDetailRequest $certificateDetailRequest)
@@ -57,5 +57,17 @@ class Order extends AbstractResource
     public function certificateUpdateDcv(CertificateUpdateDcvRequest $certificateUpdateDcvRequest)
     {
         return $this->client->post('certificate/update-dcv', $certificateUpdateDcvRequest->toArray());
+    }
+
+    /**
+     * 证书提交检查DCV接口
+     *
+     * @param CertificateValidateDcvRequest $certificateValidateDcvRequest
+     * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
+     * @link https://www.digital-sign.com.cn/document/cert-validate-dcv
+     */
+    public function certificateValidateDcv(CertificateValidateDcvRequest $certificateValidateDcvRequest)
+    {
+        return $this->client->post('certificate/validate-dcv', $certificateValidateDcvRequest->toArray());
     }
 }
