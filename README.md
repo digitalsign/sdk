@@ -2,6 +2,8 @@
 
 The php sdk for [Digital Sign® Public Key Infrastructure](https://www.digital-sign.com.cn).
 
+[![Build Status](https://travis-ci.com/digitalsign/sdk.svg?branch=master)](https://travis-ci.com/digitalsign/sdk)
+
 [Get](https://www.digital-sign.com.cn/dashboard/agent/access-key) the `AccessKey` key pair.
 
 This sdk is released for professional php engineers.
