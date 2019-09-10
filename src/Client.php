@@ -7,6 +7,7 @@ use DigitalSign\Sdk\Exceptions\InsufficientBalanceException;
 use DigitalSign\Sdk\Exceptions\RequestException;
 use DigitalSign\Sdk\Resources\Order;
 use DigitalSign\Sdk\Resources\Product;
+use DigitalSign\Sdk\Traits\SignTrait;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 use function GuzzleHttp\json_decode;

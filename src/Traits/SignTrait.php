@@ -1,6 +1,6 @@
 <?php
 
-namespace DigitalSign\Sdk;
+namespace DigitalSign\Sdk\Traits;
 
 /**
  * 签名部分
