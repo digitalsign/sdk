@@ -6,6 +6,7 @@ use DigitalSign\Sdk\Requests\CertificateCreateRequest;
 use DigitalSign\Sdk\Requests\CertificateDetailRequest;
 use DigitalSign\Sdk\Requests\CertificateReissueRequest;
 use DigitalSign\Sdk\Requests\CertificateUpdateDcvRequest;
+use DigitalSign\Sdk\Requests\CertificateValidateDcvRequest;
 
 class Order extends AbstractResource
 {
@@ -22,12 +23,13 @@ class Order extends AbstractResource
         return $this->client->post('certificate/create', $certificateCreateRequest->toArray());
     }
 
- 
+
      /**
       * 证书重签接口
       *
       * @param CertificateReissueRequest $certificateReissueRequest
       * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
+      *
       * @link https://www.digital-sign.com.cn/document/cert-reissue
       */
      public function certificateReissue(CertificateReissueRequest $certificateReissueRequest)
@@ -40,6 +42,7 @@ class Order extends AbstractResource
      *
      * @param CertificateDetailRequest $certificateDetailRequest
      * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
+     *
      * @link https://www.digital-sign.com.cn/document/cert-detail
      */
     public function certificateDetail(CertificateDetailRequest $certificateDetailRequest)
@@ -52,6 +55,7 @@ class Order extends AbstractResource
      *
      * @param CertificateUpdateDcvRequest $certificateUpdateDcvRequest
      * @return \DigitalSign\Sdk\Scheme\Certificate\DnsDCV[]|\DigitalSign\Sdk\Scheme\Certificate\EmailDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpsDCV[]
+     *
      * @link https://www.digital-sign.com.cn/document/cert-update-dcv
      */
     public function certificateUpdateDcv(CertificateUpdateDcvRequest $certificateUpdateDcvRequest)
@@ -64,6 +68,7 @@ class Order extends AbstractResource
      *
      * @param CertificateValidateDcvRequest $certificateValidateDcvRequest
      * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
+     *
      * @link https://www.digital-sign.com.cn/document/cert-validate-dcv
      */
     public function certificateValidateDcv(CertificateValidateDcvRequest $certificateValidateDcvRequest)

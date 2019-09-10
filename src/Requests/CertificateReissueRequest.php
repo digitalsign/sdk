@@ -23,6 +23,8 @@ namespace DigitalSign\Sdk\Requests;
  * @property string $contact_title OV/EV必传,联系人职位
  * @property string $contact_phone OV/EV必传,联系人电话
  * @property string $notify_url 必传,证书颁发后的通知地址
+ *
+ * @link https://www.digital-sign.com.cn/document/cert-reissue
  */
 class CertificateReissueRequest extends AbstractRequest
 {

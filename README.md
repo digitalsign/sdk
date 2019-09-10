@@ -1,25 +1,23 @@
 # 𝐃𝐢𝐠𝐢𝐭𝐚𝐥 𝐒𝐢𝐠𝐧® 𝐏𝐮𝐛𝐥𝐢𝐜 𝐊𝐞𝐲 𝐈𝐧𝐟𝐫𝐚𝐬𝐭𝐫𝐮𝐜𝐭𝐮𝐫𝐞's 𝐏𝐇𝐏 𝐒𝐃𝐊
 
-The php sdk for [Digital Sign® Public Key Infrastructure](https://www.digital-sign.com.cn).
+这是 [Digital Sign® Public Key Infrastructure](https://www.digital-sign.com.cn) 开放API的 PHP SDK.
 
 [![Build Status](https://travis-ci.com/digitalsign/sdk.svg?branch=master)](https://travis-ci.com/digitalsign/sdk)
 
-[Get](https://www.digital-sign.com.cn/dashboard/agent/access-key) the `AccessKey` key pair.
+[获取](https://www.digital-sign.com.cn/dashboard/agent/access-key) `AccessKey` 秘钥对.
 
-This sdk is released for professional php engineers.
-
-Maybe you are looking for official modules:
+此SDK包仅面向开发者提供支持，若您是分销商，您可以需要:
 - [Digital Sign® Module for WHMCS](https://www.digital-sign.com/download/modules/whmcs-latest.zip)
 - [Digital Sign® Module for HostBill](https://www.digital-sign.com/download/modules/hostbill-latest.zip)
 - [Digital Sign® Module for 宝塔(bt.cn)](https://www.digital-sign.com/download/modules/bt-latest.zip)
 
-## Installation
+## 安装
 
 ```bash
 composer require digitalsign/sdk -vvv
 ```
 
-## Usage
+## 使用
 
 ```php
 <?php
@@ -28,14 +26,14 @@ use DigitalSign\Sdk\Client;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$sdk = new Client('ArQS4AVlUsV69mcN', '5WMp5M7f75a8OvzmamiEZ7yvI');
+$sdk = new Client('accessKeyId', 'accessKeySecret');
 $result = $sdk->product->productList();
 print($result->products);
 ```
 
-## Intellisense
+## 智能感知
 
-Our major features support Intellisense(VS Code、PHPStorm).
+我们的 SDK 将智能感知 Intellisense (VS Code、PHPStorm) 做为目标之一.
 ![Intellisense.png](https://user-images.githubusercontent.com/6964962/64444468-c5336700-d106-11e9-81aa-e660e72a1149.png)
 
 ## License

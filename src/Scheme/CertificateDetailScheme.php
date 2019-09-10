@@ -11,6 +11,11 @@ namespace DigitalSign\Sdk\Scheme;
  * @property \DigitalSign\Sdk\Scheme\Certificate\DnsDCV[]|\DigitalSign\Sdk\Scheme\Certificate\EmailDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpsDCV[] $dcv
  * @property string $issued_cert 签发的证书
  * @property string $issuer_cert 签发者证书
+ *
+ * @link https://www.digital-sign.com.cn/document/cert-issue
+ * @link https://www.digital-sign.com.cn/document/cert-reissue
+ * @link https://www.digital-sign.com.cn/document/cert-detail
+ * @link https://www.digital-sign.com.cn/document/cert-validate-dcv
  */
 class CertificateDetailScheme
 {
