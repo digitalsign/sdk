@@ -12,10 +12,10 @@ namespace DigitalSign\Sdk\Scheme;
  * @property string $issued_cert 签发的证书
  * @property string $issuer_cert 签发者证书
  *
- * @link https://www.digital-sign.com.cn/document/cert-issue
- * @link https://www.digital-sign.com.cn/document/cert-reissue
- * @link https://www.digital-sign.com.cn/document/cert-detail
- * @link https://www.digital-sign.com.cn/document/cert-validate-dcv
+ * @link https://www.digital-sign.com.cn/api/cert-issue
+ * @link https://www.digital-sign.com.cn/api/cert-reissue
+ * @link https://www.digital-sign.com.cn/api/cert-detail
+ * @link https://www.digital-sign.com.cn/api/cert-validate-dcv
  */
 class CertificateDetailScheme
 {

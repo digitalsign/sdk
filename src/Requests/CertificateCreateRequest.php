@@ -27,7 +27,7 @@ namespace DigitalSign\Sdk\Requests;
  * @property string $contact_email 必传,联系人邮箱
  * @property string $notify_url 必传,证书颁发后的通知地址
  *
- * @link https://www.digital-sign.com.cn/document/cert-issue
+ * @link https://www.digital-sign.com.cn/api/cert-issue
  */
 class CertificateCreateRequest extends AbstractRequest
 {

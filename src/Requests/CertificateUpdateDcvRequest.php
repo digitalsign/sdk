@@ -10,7 +10,7 @@ namespace DigitalSign\Sdk\Requests;
  * @property string $type 必传,验证类型:dns/http/https/email
  * @property string $value 当 type=email 时候必传,邮箱地址
  *
- * @link https://www.digital-sign.com.cn/document/cert-update-dcv
+ * @link https://www.digital-sign.com.cn/api/cert-update-dcv
  */
 class CertificateUpdateDcvRequest extends AbstractRequest
 {

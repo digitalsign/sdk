@@ -2,6 +2,7 @@
 
 namespace DigitalSign\Sdk\Resources;
 
+use DigitalSign\Sdk\Requests\CertificateAddSanRequest;
 use DigitalSign\Sdk\Requests\CertificateCreateRequest;
 use DigitalSign\Sdk\Requests\CertificateDetailRequest;
 use DigitalSign\Sdk\Requests\CertificateReissueRequest;
@@ -16,7 +17,7 @@ class Order extends AbstractResource
      * @param CertificateCreateRequest $certificateCreateRequest
      * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
      *
-     * @link https://www.digital-sign.com.cn/document/cert-issue
+     * @link https://www.digital-sign.com.cn/api/cert-issue
      */
     public function certificateCreate(CertificateCreateRequest $certificateCreateRequest)
     {
@@ -30,7 +31,7 @@ class Order extends AbstractResource
       * @param CertificateReissueRequest $certificateReissueRequest
       * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
       *
-      * @link https://www.digital-sign.com.cn/document/cert-reissue
+      * @link https://www.digital-sign.com.cn/api/cert-reissue
       */
      public function certificateReissue(CertificateReissueRequest $certificateReissueRequest)
      {
@@ -43,7 +44,7 @@ class Order extends AbstractResource
      * @param CertificateDetailRequest $certificateDetailRequest
      * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
      *
-     * @link https://www.digital-sign.com.cn/document/cert-detail
+     * @link https://www.digital-sign.com.cn/api/cert-detail
      */
     public function certificateDetail(CertificateDetailRequest $certificateDetailRequest)
     {
@@ -56,7 +57,7 @@ class Order extends AbstractResource
      * @param CertificateUpdateDcvRequest $certificateUpdateDcvRequest
      * @return \DigitalSign\Sdk\Scheme\Certificate\DnsDCV[]|\DigitalSign\Sdk\Scheme\Certificate\EmailDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpDCV[]|\DigitalSign\Sdk\Scheme\Certificate\HttpsDCV[]
      *
-     * @link https://www.digital-sign.com.cn/document/cert-update-dcv
+     * @link https://www.digital-sign.com.cn/api/cert-update-dcv
      */
     public function certificateUpdateDcv(CertificateUpdateDcvRequest $certificateUpdateDcvRequest)
     {
@@ -69,10 +70,23 @@ class Order extends AbstractResource
      * @param CertificateValidateDcvRequest $certificateValidateDcvRequest
      * @return \DigitalSign\Sdk\Scheme\CertificateDetailScheme
      *
-     * @link https://www.digital-sign.com.cn/document/cert-validate-dcv
+     * @link https://www.digital-sign.com.cn/api/cert-validate-dcv
      */
     public function certificateValidateDcv(CertificateValidateDcvRequest $certificateValidateDcvRequest)
     {
         return $this->client->post('certificate/validate-dcv', $certificateValidateDcvRequest->toArray());
+    }
+
+    /**
+     * 添加DCV接口
+     *
+     * @param CertificateAddSanRequest $certificateAddSanRequest
+     * @return \DigitalSign\Sdk\Scheme\CertificateAddSanScheme
+     *
+     * @link https://www.digital-sign.com.cn/api/cert-add-san
+     */
+    public function certificateAddSan(CertificateAddSanRequest $certificateAddSanRequest)
+    {
+        return $this->client->post('certificate/add-san', $certificateAddSanRequest->toArray());
     }
 }
