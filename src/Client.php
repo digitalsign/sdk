@@ -85,7 +85,8 @@ class Client
         $api = $arguments[0];
         $resource = '/' . $api;
 
-        $parameters = $this->sign($resource, isset($arguments[1]) ? $arguments[1] : []);
+        $parameters = isset($arguments[1]) ? $arguments[1] : [];
+        $parameters = $this->sign($resource, $parameters, $this->accessKeyId, $this->accessKeySecret);
 
         $uri = $this->apiOrigin . $resource;
 
