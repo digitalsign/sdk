@@ -11,6 +11,26 @@ namespace DigitalSign\Sdk\Traits;
 trait SignTrait
 {
     /**
+     * 遍历数组, 进行字符串化，并trim
+     *
+     * @param array $arr
+     * @return array
+     */
+    private function everthingStringize($arr)
+    {
+        foreach ($arr as $key => $value) {
+            if (is_numeric($value)) {
+                $arr[$key] = (string) $value;
+            } else if (is_array($value)) {
+                $arr[$key] = $this->everthingStringize($value);
+            } else if (is_string($value)) {
+                $arr[$key] = trim($value);
+            }
+        }
+        return $arr;
+    }
+
+    /**
      * 签名方法
      *
      * @param string $resource
@@ -29,8 +49,15 @@ trait SignTrait
         date_default_timezone_set('PRC');
 
         $parameters['accessKeyId'] = $this->accessKeyId;
-        $parameters['nonce'] = uniqid();
-        $parameters['timestamp'] = date('Y-m-d\TH:i:s\Z');
+
+        if (!isset($parameters['nonce'])) {
+            $parameters['nonce'] = uniqid();
+        }
+        if (!isset($parameters['timestamp'])) {
+            $parameters['timestamp'] = date('Y-m-d\TH:i:s\Z');
+        }
+
+        $parameters = $this->everthingStringize($parameters);
 
         ksort($parameters);
         date_default_timezone_set($defaultTimeZone);
