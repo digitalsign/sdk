@@ -14,6 +14,11 @@ abstract class TestCase extends AbstractTestCase
      */
     public function sdk()
     {
+        $_SERVER['DIGITALSIGN_ACCESS_KEY_ID'] = 'xXvEITWYpaciQaMD';
+        $_SERVER['DIGITALSIGN_ACCESS_KEY_SECRET'] = 'gsLB9YKH8ElvJ6fKK5j4jES4XjA';
+        $_SERVER['DIGITALSIGN_API_ORIGIN'] = 'https://staging.api.digital-sign.com.cn';
+        $_SERVER['DIGITALSIGN_ORDER_ID'] = 5263;
+
         $access_key_id = $_SERVER['DIGITALSIGN_ACCESS_KEY_ID'];
         $access_key_secret = $_SERVER['DIGITALSIGN_ACCESS_KEY_SECRET'];
         $api_origin = $_SERVER['DIGITALSIGN_API_ORIGIN'];
