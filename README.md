@@ -7,9 +7,9 @@
 [获取](https://www.digital-sign.com.cn/dashboard/agent/access-key) `AccessKey` 秘钥对.
 
 此SDK包仅面向开发者提供支持，若您是分销商，您可以需要:
-- [Digital Sign® Module for WHMCS](https://www.digital-sign.com/download/modules/whmcs-latest.zip)
-- [Digital Sign® Module for HostBill](https://www.digital-sign.com/download/modules/hostbill-latest.zip)
-- [Digital Sign® Module for 宝塔(bt.cn)](https://www.digital-sign.com/download/modules/bt-latest.zip)
+- [Digital Sign® Module for WHMCS](https://www.digital-sign.com.cn/download/modules/whmcs-latest.zip)
+- [Digital Sign® Module for HostBill](https://www.digital-sign.com.cn/download/modules/hostbill-latest.zip)
+- [Digital Sign® Module for 宝塔(bt.cn)](https://www.digital-sign.com.cn/download/modules/bt-latest.zip)
 
 ## 安装
 
