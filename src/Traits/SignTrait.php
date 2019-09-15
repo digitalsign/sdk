@@ -25,6 +25,9 @@ trait SignTrait
                 $arr[$key] = $this->everthingStringize($value);
             } else if (is_string($value)) {
                 $arr[$key] = trim($value);
+                if ($arr[$key] === '') {
+                    $arr[$key] = null;
+                }
             }
         }
         return $arr;
