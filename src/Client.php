@@ -9,6 +9,7 @@ use DigitalSign\Sdk\Resources\Order;
 use DigitalSign\Sdk\Resources\Product;
 use DigitalSign\Sdk\Traits\SignTrait;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\RequestOptions;
 
 use function GuzzleHttp\json_decode;
 
@@ -91,7 +92,7 @@ class Client
         $uri = $this->apiOrigin . $resource;
 
         $response = $http->{$method}($uri, [
-            ($method == 'get' ? 'query' : 'form_params') => $parameters,
+            ($method == 'get' ? 'query' : RequestOptions::JSON) => $parameters,
         ]);
 
         $json = json_decode($response->getBody());
