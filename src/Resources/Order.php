@@ -5,6 +5,7 @@ namespace DigitalSign\Sdk\Resources;
 use DigitalSign\Sdk\Requests\CertificateAddSanRequest;
 use DigitalSign\Sdk\Requests\CertificateCreateRequest;
 use DigitalSign\Sdk\Requests\CertificateDetailRequest;
+use DigitalSign\Sdk\Requests\CertificateRefundRequest;
 use DigitalSign\Sdk\Requests\CertificateReissueRequest;
 use DigitalSign\Sdk\Requests\CertificateUpdateDcvRequest;
 use DigitalSign\Sdk\Requests\CertificateValidateDcvRequest;
@@ -88,5 +89,18 @@ class Order extends AbstractResource
     public function certificateAddSan(CertificateAddSanRequest $certificateAddSanRequest)
     {
         return $this->client->post('certificate/add-san', $certificateAddSanRequest->toArray());
+    }
+
+    /**
+     * 退款
+     *
+     * @param CertificateRefundRequest $certificateRefundRequest
+     * @return \DigitalSign\Sdk\Scheme\CertificateRefundScheme
+     *
+     * @link https://www.digital-sign.com.cn/api/cert-refund
+     */
+    public function certificateRefund(CertificateRefundRequest $certificateRefundRequest)
+    {
+        return $this->client->post('certificate/refund', $certificateRefundRequest->toArray());
     }
 }
