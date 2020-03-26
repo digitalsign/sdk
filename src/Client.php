@@ -57,7 +57,17 @@ class Client
      */
     protected $apiOrigin;
 
-    public function __construct($accessKeyId, $accessKeySecret, $apiOrigin = null)
+    /**
+     * @var int
+     */
+    protected $connectTimeout;
+
+    /**
+     * @var int
+     */
+    protected $readTimeout;
+
+    public function __construct($accessKeyId, $accessKeySecret, $apiOrigin = null, $connectTimeout = 5, $readTimeout = 15)
     {
         if ($apiOrigin === null) {
             $apiOrigin = self::ORIGIN_API;
@@ -69,6 +79,8 @@ class Client
 
         $this->product = new Product($this);
         $this->order = new Order($this);
+        $this->connectTimeout = $connectTimeout;
+        $this->readTimeout = $readTimeout;
         //$this->callback = new Callback($this);
     }
 
@@ -81,7 +93,10 @@ class Client
      */
     public function __call($method, $arguments = [])
     {
-        $http = new GuzzleHttpClient();
+        $http = new GuzzleHttpClient([
+            RequestOptions::CONNECT_TIMEOUT => $this->connectTimeout,
+            RequestOptions::READ_TIMEOUT => $this->readTimeout,
+        ]);
 
         $api = $arguments[0];
         $resource = '/' . $api;
