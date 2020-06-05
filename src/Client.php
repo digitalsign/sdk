@@ -9,7 +9,9 @@ use DigitalSign\Sdk\Resources\Order;
 use DigitalSign\Sdk\Resources\Product;
 use DigitalSign\Sdk\Traits\SignTrait;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Validation\ValidationException;
 
 use function GuzzleHttp\json_decode;
 
@@ -93,36 +95,55 @@ class Client
      */
     public function __call($method, $arguments = [])
     {
-        $http = new GuzzleHttpClient([
-            RequestOptions::CONNECT_TIMEOUT => $this->connectTimeout,
-            RequestOptions::READ_TIMEOUT => $this->readTimeout,
-        ]);
+        try {
+            $http = new GuzzleHttpClient([
+                RequestOptions::CONNECT_TIMEOUT => $this->connectTimeout,
+                RequestOptions::READ_TIMEOUT => $this->readTimeout,
+            ]);
 
-        $api = $arguments[0];
-        $resource = '/' . $api;
+            $api = $arguments[0];
+            $resource = '/' . $api;
 
-        $parameters = isset($arguments[1]) ? $arguments[1] : [];
-        $parameters = $this->sign($resource, $parameters, $this->accessKeyId, $this->accessKeySecret);
+            $parameters = isset($arguments[1]) ? $arguments[1] : [];
+            $parameters = $this->sign($resource, $parameters, $this->accessKeyId, $this->accessKeySecret);
 
-        $uri = $this->apiOrigin . $resource;
+            $uri = $this->apiOrigin . $resource;
 
-        $response = $http->{$method}($uri, [
-            ($method == 'get' ? 'query' : RequestOptions::JSON) => $parameters,
-        ]);
+            $response = $http->{$method}($uri, [
+                //($method == 'get' ? 'query' : RequestOptions::JSON) => $parameters,
+            ]);
 
-        $json = json_decode($response->getBody());
+            $json = json_decode($response->getBody()->__toString());
 
-        if (!isset($json->success) || !$json->success) {
-            $exception_class = RequestException::class;
-            $map = static::CODE_EXCEPTION_MAP;
-            if (!isset($json->error_code)) {
-                throw new RequestException('未知错误', -1);
+            if (!isset($json->success) || !$json->success) {
+                $exception_class = RequestException::class;
+                $map = static::CODE_EXCEPTION_MAP;
+                if (!isset($json->error_code)) {
+                    throw new RequestException('未知错误', -1);
+                }
+                if (isset($map[$json->error_code])) {
+                    $exception_class = $map[$json->error_code];
+                }
+                throw new $exception_class(isset($json->message) ? $json->message : '请求接口出错', isset($json->error_code) ? $json->error_code : -1);
             }
-            if (isset($map[$json->error_code])) {
-                $exception_class = $map[$json->error_code];
+            return $json->data;
+        } catch (ClientException $e) {
+            // 若不存在 Laravel's ValidationException 类，或者版本太低没有 withMessages 方法，抛出Guzzle的异常
+            if (!class_exists(ValidationException::class) || !method_exists(ValidationException::class, 'withMessages')) {
+                throw $e;
             }
-            throw new $exception_class(isset($json->message) ? $json->message : '请求接口出错', isset($json->error_code) ? $json->error_code : -1);
+
+            $response = $e->getResponse();
+            if ($response->getStatusCode() !== 412) {
+                throw $e;
+            }
+
+            $data = json_decode($response->getBody()->__toString(), true);
+            if (JSON_ERROR_NONE !== json_last_error() || !isset($data['message'])) {
+                throw new ClientException('JSON DECODE ERROR', $e->getRequest(), $e->getResponse(), $e);
+            }
+
+            throw ValidationException::withMessages($data['message']);
         }
-        return $json->data;
     }
 }
