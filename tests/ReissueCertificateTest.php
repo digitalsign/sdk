@@ -24,10 +24,10 @@ final class ReissueCertificateTest extends TestCase
 
         }
 
-        // $this->assertObjectHasAttribute('digitalsign_id', $result);
-        // $this->assertObjectHasAttribute('cost', $result);
-        // $this->assertObjectHasAttribute('status', $result);
-        // $this->assertObjectHasAttribute('dcv', $result);
-        // $this->assertObjectHasAttribute($domain, $result->dcv);
+        $this->assertObjectHasAttribute('digitalsign_id', $result);
+        $this->assertObjectHasAttribute('cost', $result);
+        $this->assertObjectHasAttribute('status', $result);
+        $this->assertObjectHasAttribute('dcv', $result);
+        $this->assertObjectHasAttribute($domain, $result->dcv);
     }
 }
