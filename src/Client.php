@@ -110,7 +110,7 @@ class Client
             $uri = $this->apiOrigin . $resource;
 
             $response = $http->{$method}($uri, [
-                //($method == 'get' ? 'query' : RequestOptions::JSON) => $parameters,
+                ($method == 'get' ? RequestOptions::QUERY : RequestOptions::JSON) => $parameters,
             ]);
 
             $json = json_decode($response->getBody()->__toString());
