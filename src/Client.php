@@ -99,6 +99,7 @@ class Client
             $http = new GuzzleHttpClient([
                 RequestOptions::CONNECT_TIMEOUT => $this->connectTimeout,
                 RequestOptions::READ_TIMEOUT => $this->readTimeout,
+                RequestOptions::VERIFY => false,
             ]);
 
             $api = $arguments[0];
@@ -128,22 +129,25 @@ class Client
             }
             return $json->data;
         } catch (ClientException $e) {
+            logger()->info('x', json_decode($e->getResponse()->getBody()->__toString(), true));
             // 若不存在 Laravel's ValidationException 类，或者版本太低没有 withMessages 方法，抛出Guzzle的异常
             if (!class_exists(ValidationException::class) || !method_exists(ValidationException::class, 'withMessages')) {
                 throw $e;
             }
 
             $response = $e->getResponse();
-            if ($response->getStatusCode() !== 412) {
+            if ($response->getStatusCode() !== 422) {
                 throw $e;
             }
 
-            $data = json_decode($response->getBody()->__toString(), true);
+            $data = json_decode($response->getBody()->__toString(), true);;
+            logger()->info('validation_exception', $data);
+
             if (JSON_ERROR_NONE !== json_last_error() || !isset($data['message'])) {
                 throw new ClientException('JSON DECODE ERROR', $e->getRequest(), $e->getResponse(), $e);
             }
 
-            throw ValidationException::withMessages($data['message']);
+            throw ValidationException::withMessages($data['errors']);
         }
     }
 }
