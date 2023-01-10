@@ -32,7 +32,6 @@ trait SignTrait
         }
         return $arr;
     }
-}
 
     /**
      * 签名方法
@@ -87,3 +86,4 @@ trait SignTrait
         }
         return true;
     }
+}
