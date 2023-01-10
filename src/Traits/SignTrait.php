@@ -32,6 +32,7 @@ trait SignTrait
         }
         return $arr;
     }
+}
 
     /**
      * 签名方法
